@@ -1,0 +1,34 @@
+/* Rules used by all windows */
+
+/* Range input css reset */
+input[type=range]{ -webkit-appearance: none; margin: 0; padding: 0; background: none; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; border: none; border-radius: 0; background: none; }
+input[type=range]::-moz-range-thumb { border: none; border-radius: 0; background: none; }
+input[type=range]::-moz-range-track { border: none; background: none; }
+input[type=range]:focus { outline: none; }
+input[type=range]::-moz-focus-outer { border: 0; }
+
+a:focus { outline: none; }
+
+/* Animation */
+@keyframes blink {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+@-webkit-keyframes blink {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+.character {
+    display: block;
+    float: left; /* Safari does not do inline-block well */
+    width: 5px;
+    height: 6px;
+    /* background-image: TEXT.BMP via Javascript */
+    text-indent: -9999px;
+
+}
+

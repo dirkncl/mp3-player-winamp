@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title id='tit'>Winamp2-js</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Winamp 2.9 reimplemented in HTML5 and JavaScript" />
+        <meta property="og:title" content="Winamp2-js &bull; Winamp in your browser" />
+        <meta property="og:description" content="Winamp 2.9 reimplemented in HTML5 and JavaScript" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://jordaneldredge.com/projects/winamp2-js/" />
+        <meta property="og:image" content="http://jordaneldredge.com/projects/winamp2-js/preview.png" />
+        <link rel='stylesheet' type='text/css' href='css/winamp.css?inline' />
+        <link rel='stylesheet' type='text/css' href='css/page.css?inline' />
+        <link rel='stylesheet' type='text/css' href='css/main.css?inline' />
+        <link rel='stylesheet' type='text/css' href='css/playlist.css?inline' />
+        <link rel='stylesheet' type='text/css' href='css/context-menu.css?inline' />
+        <link rel="shortcut icon" sizes="16x16 32x32" href="favicon.ico">
+    </head>
+    <body>
+        <marquee class='about'>Access local files with drag-drop in the playlist window. File access with filereader modified by <a href='https://www.facebook.com/dirklevinus.nicolaas' target='_blank'>Dirk Levinus Nicolaas</a></marquee>
+        <div id='main-window' class='selected loading stop'>
+            <div id='loading'>Loading...</div>
+            <div id='title-bar'>
+                <div id='option' class='ui'>
+                    <ul id='context-menu'>
+                        <li><a href='https://github.com/captbaritone/winamp2-js' target='_blank'>Winamp2-js...</a></li>
+                        <li class='hr'><hr /></li>
+                        <li id='context-play-file'>Play File...</li>
+                        <li class='parent'>
+                            <ul>
+                                <li id='context-load-skin'>Load Skin...</li>
+                                <li class='hr'><hr /></li>
+                                <li class='skin-select' data-skin-url='skins/v2/base-2.91.wsz'>&lt;Base Skin&gt;</li>
+                                <li class='skin-select' data-skin-url='skins/v2/MacOSXAqua1-5.wsz'>Mac OSX v1.5 (Aqua)</li>
+                                <li class='skin-select' data-skin-url='skins/v2/TopazAmp1-2.wsz'>TopazAmp</li>
+                                <li class='skin-select' data-skin-url='skins/v2/Vizor1-01.wsz'>Vizor</li>
+                                <li class='skin-select' data-skin-url='skins/v2/XMMS-Turquoise.wsz'>XMMS Turquoise </li>
+                                <li class='skin-select' data-skin-url='skins/v2/ZaxonRemake1-0.wsz'>Zaxon Remake</li>
+                                <li class='skin-select' data-skin-url='skins/v2/AMD_Thunderbird_Amp.wsz'>AMD_Thunderbird</li>
+                                <li class='skin-select' data-skin-url='skins/v2/Rage_Against_The_Machine_Skin_2.wal'>Rage_Against_The_Machine_Skin</li>
+                                <li class='skin-select' data-skin-url='skins/v2/Donkey_Kong_Kongo_Jungle.wsz'>Donkey_Kong_Kongo_Jungle</li>
+                                <li class='skin-select' data-skin-url='skins/v2/Winamp_Media_Player_10.wsz'>Winamp_Media_Player_10</li>
+                                
+                                <li class='skin-select' data-skin-url='skins/v2/a400.wsz'>a400</li>
+                                <li class='skin-select' data-skin-url='skins/v2/adidas.wsz'>adidas</li>
+                                <li class='skin-select' data-skin-url='skins/v2/Aqua_X.wsz'>Aqua_X</li>
+                                <li class='skin-select' data-skin-url='skins/v2/horizon_amp_v1.wsz'>horizon_amp_v1</li>
+                                <li class='skin-select' data-skin-url='skins/v2/KeX_x959.wsz'>KeX_x959</li>
+                                
+                                <li class='skin-select' data-skin-url='skins/v2/other/BatmanBegins.wsz'>BatmanBegins</li>
+                                <li class='skin-select' data-skin-url='skins/v2/other/Carrera__3.wsz'>Carrera__3</li>
+                                <li class='skin-select' data-skin-url='skins/v2/other/Expensive_Hi-Fi_1.2.wsz'>Expensive_Hi-Fi_1.2</li>
+                                <li class='skin-select' data-skin-url='skins/v2/other/GangstaShit.wsz'>GangstaShit</li>
+                                <li class='skin-select' data-skin-url='skins/v2/other/GotHonda.wsz'>GotHonda</li>
+                                <li class='skin-select' data-skin-url='skins/v2/other/killbil.wsz'>killbil</li>
+                                <li class='skin-select' data-skin-url='skins/v2/other/MANUTD.wsz'>MANUTD</li>
+                                <li class='skin-select' data-skin-url='skins/v2/other/Maths.wsz'>Maths</li>
+                                
+                            </ul>
+                            Skins
+                        </li>
+                        <li class='hr'><hr /></li>
+                        <li id='context-exit'>Exit</li>
+                    </ul>
+                </div>
+                <div id='shade-time' class='ui'>
+                    <div id='shade-minus-sign'></div>
+                    <div id='shade-minute-first-digit' class='character'></div>
+                    <div id='shade-minute-second-digit' class='character'></div>
+                    <div id='shade-second-first-digit' class='character'></div>
+                    <div id='shade-second-second-digit' class='character'></div>
+                </div>
+                <div id='minimize' class='ui'></div>
+                <div id='shade' class='ui'></div>
+                <div id='close' class='ui'></div>
+            </div>
+            <div class='status'>
+                <div id='clutter-bar'>
+                    <div id='button-o'></div>
+                    <div id='button-a'></div>
+                    <div id='button-i'></div>
+                    <div id='button-d'></div>
+                    <div id='button-v'></div>
+                </div>
+                <div id='play-pause'></div>
+                <div id='work-indicator'></div>
+                <div id='time'>
+                    <div id='minus-sign'></div>
+                    <div id='minute-first-digit'></div>
+                    <div id='minute-second-digit'></div>
+                    <div id='second-first-digit'></div>
+                    <div id='second-second-digit'></div>
+                </div>
+                <canvas id='visualizer' width='152' height='32'></canvas>
+            </div>
+            <div class='media-info'>
+                <div id='song-title' class='text'></div>
+                <div id='kbps'></div>
+                <div id='khz'></div>
+                <div class='mono-stereo'>
+                    <div id='mono'></div>
+                    <div id='stereo'></div>
+                </div>
+            </div>
+            <input id='volume' type='range' min='0' max='100' step='1' value='50' />
+            <input id='balance' type='range' min='-100' max='100' step='2' value='0' />
+            <div class='windows'>
+                <div id='equalizer-button'></div>
+                <div id='playlist-button' class='selected'></div>
+            </div>
+            <input id='position' type='range' min='0' max='100' step='1' value='0' />
+            <div class='actions'>
+                <div id='previous'></div>
+                <div id='play'></div>
+                <div id='pause'></div>
+                <div id='stop'></div>
+                <div id='next'></div>
+            </div>
+            <div id='eject'></div>
+            <div class='shuffle-repeat'>
+                <div id="shuffle"></div>
+                <div id="repeat"></div>
+            </div>
+            <a id='about' target='_blank' href='https://github.com/captbaritone/winamp2-js'></a>
+        </div>
+        <div id='playlist' class='loading stop'>
+            <ul id='tracks'></ul>
+            <!-- These go first so that they end up below the .top div in the
+            z axis -->
+            <div class='left playlist-left-tile'></div>
+            <div class='right playlist-right-tile'></div>
+
+            <div class='top playlist-top-tile'>
+                <div class='top-left'></div>
+                <div class='title'></div>
+                <div class='top-right'>
+                    <div id='playlist-shade' class='ui'></div>
+                    <div id='playlist-close' class='ui'></div>
+                </div>
+            </div>
+
+            <div class='bottom playlist-bottom-tile'>
+                <div class='bottom-left'></div>
+                <div class='bottom-right'>
+                    <div id='playlist-previous'></div>
+                    <div id='playlist-play'></div>
+                    <div id='playlist-pause'></div>
+                    <div id='playlist-stop'></div>
+                    <div id='playlist-next'></div>
+                    <div id='playlist-eject'></div>
+                    <div id='playlist-resize-handle'></div>
+                </div>
+            </div>
+        </div>
+        <button onclick='javascript:document.getElementById("myfiles").style.display="block";document.getElementById("myDirs").style.display="none";'><input id="myfiles" multiple type="file" style="display:none">Select MP3 Files</button>
+        <button onclick='javascript:document.getElementById("myDirs").style.display="block";document.getElementById("myfiles").style.display="none"'><input id="myDirs" webkitdirectory multiple type="file" style="display:none">Select MP3 Directory</button>
+        <button id='empty' onclick='Winamp.emptyPlaylist();javascript:document.getElementById("myfiles").style.display="none";document.getElementById("myDirs").style.display="none"'><input id="myfiles" multiple type="file" style="display:none">Empty</button>
+        <div id='browser-compatibility'>
+            <p>Your browser does not support the features we need</p>
+            <p>Try using the most recent version of Chrome, Firefox or Safari</p>
+        </div>
+        <p class='about'>
+            by <a href='https://twitter.com/captbaritone'>@captbaritone</a>
+            -
+            <a href='https://github.com/captbaritone/winamp2-js'>GitHub</a>
+        </p>
+        <script src="js/jszip.2.4.0.min.js?inline"></script>
+        <script src="js/browser.js?inline"></script>
+        <script src="js/file.js?inline"></script>
+        <script src="js/visualizer.js?inline"></script>
+        <script src="js/media.js?inline"></script>
+        <script src="js/font.js?inline"></script>
+        <script src="js/skin-sprites.js?inline"></script>
+        <script src="js/skin.js?inline"></script>
+        <script src="js/multi-display.js?inline"></script>
+        <script src="js/hotkeys.js?inline"></script>
+        <script src="js/context.js?inline"></script>
+        <script src="js/window-manager.js?inline"></script>
+        <script src="js/main-window.js?inline"></script>
+        <script src="js/playlist-window.js?inline"></script>
+        <script src="js/winamp.js?inline"></script>
+        <script src="js/title.js?inline"></script>
+        <script type="text/javascript">
+            if(Browser.isCompatible()) {
+                winamp = Winamp.init({
+                    'volume': 50,
+                    'balance': 0,
+                    'mediaFile': {
+                        'url': "mp3/llama-2.91.mp3",
+                        'name': "1. DJ Mike Llama - Llama Whippin' Intro"
+                    },
+                    'skinUrl':
+                    'skins/v2/base-2.91.wsz'
+                });
+
+                Hotkeys.init(winamp);
+                Context.init(winamp);
+            } else {
+                document.getElementById('winamp').style.display = 'none';
+                document.getElementById('browser-compatibility').style.display = 'block';
+            }
+            
+        </script>
+        
+<script>
+
+</script>
+        <!-- ref:include analytics -->
+        <!-- endref -->
+    </body>
+</html>
